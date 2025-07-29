@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+  <form id="loginForm" onsubmit="return validateForm()">
+    <label>Username:</label>
+    <input type="text" id="username">
+    <span id="usernameError"></span><br><br>
+
+    <label>Email:</label>
+    <input type="text" id="email">
+    <span id="emailError"></span><br><br>
+
+    <label>Password:</label>
+    <input type="password" id="password">
+    <span id="passwordError"></span><br><br>
+
+    <label>Confirm Password:</label>
+    <input type="password" id="confirmPassword">
+    <span id="confirmPasswordError"></span><br><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    function validateForm() {
+      var username = document.getElementById("username").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var password = document.getElementById("password").value.trim();
+      var confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+      var userError = document.getElementById("usernameError");
+      var emailError = document.getElementById("emailError");
+      var passError = document.getElementById("passwordError");
+      var confirmPassError = document.getElementById("confirmPasswordError");
+      var message = document.getElementById("message");
+
+      userError.textContent = "";
+      emailError.textContent = "";
+      passError.textContent = "";
+      confirmPassError.textContent = "";
+      message.textContent = "";
+
+      var isValid = true;
+
+      if (username === "") {
+        userError.textContent = " Please enter username";
+        isValid = false;
+      }
+
+      if (email === "") {
+        emailError.textContent = " Please enter email";
+        isValid = false;
+      }
+
+      if (password === "") {
+        passError.textContent = " Please enter password";
+        isValid = false;
+      } else if (!/^[a-zA-Z0-9]{1,6}$/.test(password)) {
+        passError.textContent = " Must be 1-6 letters or digits only";
+        isValid = false;
+      }
+
+      if (confirmPassword === "") {
+        confirmPassError.textContent = " Please confirm password";
+        isValid = false;
+      } else if (password !== confirmPassword) {
+        confirmPassError.textContent = " Passwords do not match";
+        isValid = false;
+      }
+
+      if (isValid) {
+        message.textContent = "Login successful!";
+      } else {
+        message.textContent = "Please fix the errors above.";
+      }
+
+      return false; 
+    }
+  </script>
+
+</body>
+</html>
